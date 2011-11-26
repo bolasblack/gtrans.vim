@@ -33,3 +33,8 @@ History:
         目标语言的缩写（就是要传入的参数） : 
         对应的语言名称缩写（需要通过GtransLangHelp 命令查找）
     }
+
+
+可以通过设置 g:gtrans_Engine 变量改变翻译服务的提供商（默认为 Google），如：
+
+    let g:gtrans_Engine = 'google' " 或者 bing
