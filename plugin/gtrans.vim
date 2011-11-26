@@ -199,12 +199,12 @@ sourceText.replace(' ','%20')
 sourceText.replace('\n','%0A')
 transEngineName = vim.eval('g:gtrans_Engine')
 engineHandleDict = {'google': GoogleGetJSON, 'bing': BingGetJSON}
-#try:
-assert transEngineName in engineHandleDict.keys()
-targetLang = getTargetLang(targetLang, transEngineName)
-output = engineHandleDict[transEngineName](sourceText, targetLang)
-#except Exception, e:
-#    output = str(e)
+try:
+    assert transEngineName in engineHandleDict.keys()
+    targetLang = getTargetLang(targetLang, transEngineName)
+    output = engineHandleDict[transEngineName](sourceText, targetLang)
+except Exception, e:
+    output = str(e)
 vim.command('call s:ShowTransWindow("' + output.encode(vim.eval("&encoding")) + '")')
 EOF
 endfunc
