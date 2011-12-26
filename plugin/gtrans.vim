@@ -215,11 +215,21 @@ func! s:ShowTransWindow(string) " [[[
 	if bufexists("TransWindow") > 0
 		sil! bwipeout TransWindow
 	endif
+
 	silent botright new TransWindow
+
 	if bufexists("TransWindow") > 0
-		resize 5
-		set buftype=nofile
+		"set buftype=nofile
 		sil normal "zP
+
+        "let b:height = min([winheight(bufwinnr(bufnr('%'))) / 2, a:endline - a:startline + 2])
+        "resize b:height
+		resize 5
+
+        " Set up scratch buffer.
+        setlocal bufhidden=wipe buftype=nofile
+        setlocal nobuflisted nomodifiable noswapfile nowrap
+        nnoremap <buffer> <silent> q :hide<CR>
 	endif
 endfunc
 " ]]]
