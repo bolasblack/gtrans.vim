@@ -44,3 +44,4 @@ let g:gtrans_LangDict = {
 ```viml
 let g:gtrans_Engine = 'google' " 或者 bing
 ```
+add new line here
