@@ -83,6 +83,7 @@ endfunc
 
 " ]]]
 
+"from https://stackoverflow.com/a/6271254/4869088 via @xolox
 func! s:GetVisual() range
     let [lnum1, col1] = getpos("'<")[1:2]
     let [lnum2, col2] = getpos("'>")[1:2]
