@@ -3,6 +3,7 @@ FileName: gtrans.vim
 Desc: Google Translate Plugin for Vim (Need python)
 
 Install: 把文件复制到 `$VIM/plugin/` 目录下即可，插件需要 Python 的支持。
+Or: add Bundle 'bolasblack/gtrans.vim' in vimrc file then run :BundleInstall
 
 History: 
 

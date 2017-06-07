@@ -75,7 +75,7 @@ func! GetTrans(...) " [[[
     call s:Translate(eval("expand('<cword>')"), targetLang)
 endfunc
 
-func! GetTransVis()
+func! GetTransVis() range
     let targetLang = g:gtrans_DefaultLang
     let visText = s:GetVisual()
     call s:Translate(visText, targetLang)
@@ -83,32 +83,15 @@ endfunc
 
 " ]]]
 
-func! s:GetVisual() " [[[
-	let firstcol= col("'<")
-	let lastcol= col("'>")
-	let firstline = line("'<")
-	let lastline = line("'>")
-	let str = ''
-	if firstline == lastline 
-		let ll  = getline(firstline)
-		let str = strpart(ll,firstcol-1,lastcol-firstcol)
-	else
-		let lcount = firstline+1
-		let lines = []
-		let ll  = strpart(getline(firstline),firstcol-1)
-		call add(lines,ll)
-		while lcount < lastline
-			let ll = getline(lcount)
-			call add(lines,ll)
-			let lcount += 1
-		endw
-		let ll = strpart(getline(lcount),0,lastcol-1)
-		call add(lines,ll)
-		let str = join(lines,"\n")
-	endif
-	return str
+"from https://stackoverflow.com/a/6271254/4869088 via @xolox
+func! s:GetVisual() range
+    let [lnum1, col1] = getpos("'<")[1:2]
+    let [lnum2, col2] = getpos("'>")[1:2]
+    let lines = getline(lnum1, lnum2)
+    let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][col1 - 1:]
+    return join(lines, " ")
 endfunc
-" ]]]
 
 func! s:Translate(text, tl) " [[[
 python << EOF
